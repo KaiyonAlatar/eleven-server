@@ -16,6 +16,8 @@ var Item = require('model/Item');
 var Bag = require('model/Bag');
 var Group = require('model/Group');
 var GameObject = require('model/GameObject');
+var Geo = require('model/Geo');
+var Location = require('model/Location');
 var config = require('config');
 var rpc = require('data/rpc');
 var sessionMgr = require('comm/sessionMgr');
@@ -529,3 +531,31 @@ exports.apiReloadDataForGlobalPathFinding = function apiReloadDataForGlobalPathF
 exports.apiSetIsCopying = function apiSetIsCopying(val) {
 	RC.getContext().isCopying = val;
 };
+
+/**
+ * create new empty location
+ */
+exports.apiNewLocation = function apiNewLocation(label, moteId, hubId, locationType) {
+	log.debug('global.apiNewLocation(%s, %s, %s, %s)', label, moteId, hubId, locationType);
+
+	var data = {};
+	data.layers = {
+		middleground: {
+			decos: {},
+			doors: {},
+			signposts: {},
+		},
+	};
+	var g = Geo.create(data);
+
+	data = {};
+	data.moteid = moteId;
+	data.hubid = hubId;
+	data.class_tsid = locationType;
+	data.items = [];
+	data.players = [];
+	data.geo = g;
+
+	var l = Location.create(data);
+	return l;
+}

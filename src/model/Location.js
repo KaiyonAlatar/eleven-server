@@ -255,6 +255,7 @@ Location.prototype.updateGeo = function updateGeo(data) {
 	// optional parameter handling
 	if (!data) data = this.geometry;
 	this.geometry = data;
+	if(!this.geometry) this.geometry = {};
 	// workaround for GSJS functions that replace the whole geometry property
 	if (!(utils.isGeo(this.geometry)) || !this.geometry.__isGO) {
 		this.geometry.tsid = this.getGeoTsid();  // make sure new data does not have a template TSID
