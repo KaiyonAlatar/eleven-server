@@ -534,8 +534,14 @@ exports.apiSetIsCopying = function apiSetIsCopying(val) {
 
 /**
  * create new empty location
+ *
+ * @param {string} [label] name for new location
+ * @param {string} [moteId] mote Id for new location
+ * @param {string} [hubId] hub Id for new location
+ * @param {string} [classTsid] class tsid for the new location
+ * @returns {Location} the new location
  */
-exports.apiNewLocation = function apiNewLocation(label, moteId, hubId, locationType) {
+exports.apiNewLocation = function apiNewLocation(label, moteId, hubId, classTsid) {
 	log.debug('global.apiNewLocation(%s, %s, %s, %s)', label, moteId, hubId, locationType);
 
 	var data = {};
@@ -551,7 +557,7 @@ exports.apiNewLocation = function apiNewLocation(label, moteId, hubId, locationT
 	data = {};
 	data.moteid = moteId;
 	data.hubid = hubId;
-	data.class_tsid = locationType;
+	data.class_tsid = classTsid;
 	data.items = [];
 	data.players = [];
 	data.geo = g;
