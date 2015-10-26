@@ -246,6 +246,14 @@ PlayerApi.prototype.apiPlayerCanReach = function apiPlayerCanReach(x, y) {
 	return true;
 };
 
+/**
+ * Gets an array of item stacks matching the class_id that contains a
+ * collection of the stacks where the total count is >= maxCount
+ *
+ * @param {string} class_id: the class of item being searched
+ * @param {number} maxcount: the number being looked for
+ * @returns {array} an array of item stacks
+ */
 PlayerApi.prototype.apiInventoryGetItems = function(class_id, maxCount) {
 	log.debug('%s.apiInventoryGetItems(%s, %s)', this, class_id, maxCount);
 	return this.inventoryGetItems(class_id, maxCount);
